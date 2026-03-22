@@ -167,18 +167,35 @@ class MyWidget(QWidget):
         print("maximumSize")
 
     def on_caps_lock_pressed_twice(self):
+        """
+        处理连续两次按下CAPS LOCK键的事件
+
+        该方法实现了CAPS LOCK键的双击检测机制：
+        - 第一次按下：将caps_lock_pressed标志设为True
+        - 第二次按下（连续）：触发主要操作显示窗口
+
+        方法管理两个状态标志：
+        - caps_lock_pressed：跟踪是否按过一次CAPS LOCK
+        - caps_lock_toggled：表示双击检测成功
+
+        当检测到双击时：
+        - 显示主窗口部件
+        - 重置跟踪标志
+        - 打印"minimumSize"到控制台用于调试
+        """
         # self.searchStr = '';
         # self.minimumSize()
 
         if not self.caps_lock_pressed:
+            # 第一次按下CAPS LOCK - 设置标志以跟踪连续按下
             self.caps_lock_pressed = True
         else:
-            # 检测到 CAPS LOCK 键连续按下
+            # 检测到连续第二次按下CAPS LOCK - 触发主要操作
             self.caps_lock_toggled = True
             self.caps_lock_pressed = False
-            self.show()
+            self.show()  # 显示主窗口部件
             # self.tray_icon.hide()
-            print("minimumSize")
+            print("minimumSize")  # 调试输出
 
     # def closeEvent(self, event):
     #     # 将窗口隐藏并显示在系统托盘中
